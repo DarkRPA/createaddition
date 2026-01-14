@@ -80,8 +80,9 @@ public class InternalEnergyStorage extends SnapshotParticipant<Long> implements 
     }
 
     @Override
-    public long insert(long maxAmount, TransactionContext transaction) {
-        StoragePreconditions.notNegative(maxAmount);
+    public long insert(long quantity, TransactionContext transaction) {
+        //StoragePreconditions.notNegative(maxAmount);
+        long maxAmount = Math.abs(quantity);
 
         long inserted = Math.min(maxReceive, Math.min(maxAmount, capacity - amount));
 
@@ -95,8 +96,9 @@ public class InternalEnergyStorage extends SnapshotParticipant<Long> implements 
     }
 
     @Override
-    public long extract(long maxAmount, TransactionContext transaction) {
-        StoragePreconditions.notNegative(maxAmount);
+    public long extract(long quantity, TransactionContext transaction) {
+        //StoragePreconditions.notNegative(maxAmount);
+        long maxAmount = Math.abs(quantity);
 
         long extracted = Math.min(maxExtract, Math.min(maxAmount, amount));
 
